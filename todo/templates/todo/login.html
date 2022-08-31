@@ -1,0 +1,27 @@
+{% extends 'todo/main.html' %}
+{% block content %}
+<style>
+    .input-group{
+        margin-bottom:10px;
+    }
+</style>
+
+
+<div class="header-bar">
+    <h1>Login</h1>
+</div>
+<div class="card-body">
+    <form method="POST">
+        {% csrf_token %}
+        <div class="input-group ">
+            <input type="text" name="username" placeholder="Username..." class="form-control">
+        </div>
+        <div class="input-group ">
+        <input type="password" name="password" placeholder="Password..." class="form-control" >
+        </div>
+       <input class="button" type="submit" value="Login">
+    </form>
+    <p>Don't have an account? <a href="{% url 'registerPage' %}">Register</a></p>
+</div>
+
+{% endblock content %}

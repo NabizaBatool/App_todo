@@ -1,0 +1,71 @@
+{% extends 'todo/main.html' %}
+{% block content %}
+
+<div class="header-bar">
+    <h1>Register</h1>
+</div>
+
+<div class="card-body">
+  <form method="POST" >
+    {% csrf_token %}
+        <label>{{form.username.label}}</label>
+        {{form.username}}                                     
+        {% if form.errors.username %}
+
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ form.errors.username }}
+         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+        {% endif %}
+        <label>{{form.email.label}}</label>
+        {{form.email}}                                     
+        {% if form.errors.email %}
+
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ form.errors.email }}
+         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+        {% endif %}
+        
+        <label>{{form.password1.label}}</label>
+        {{form.password1}}
+        {% if form.errors.password1 %}
+
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ form.errors.password1 }}
+         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+         {% endif %}
+            
+        <label>{{form.password2.label}}</label>
+        {{form.password2}}
+
+        {% if form.errors.password2 %}
+        
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ form.errors.password2 }}
+         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+         {% endif %}
+        
+            
+        <input style="margin-top:10px ;" class="button" type="submit" value="Register">
+    </form>
+    <p>Already have an account? <a href="{% url 'loginPage' %}">Login</a></p>
+</div>
+
+
+
+
+{% endblock content %}

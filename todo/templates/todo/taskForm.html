@@ -1,0 +1,24 @@
+{% extends 'todo/main.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="header-bar">
+    <a href="{% url 'index' %}">&#8592; Back</a>
+</div>
+
+
+<div class="card-body">
+    <form method="POST" action="">
+        {% csrf_token %}
+        <label>{{form.title.label}}</label>
+        {{form.title}}  
+        <label>{{form.description.label}}</label>
+        {{form.description}} <br>
+        {{form.complete}}  
+        {{form.complete.label}}<br>
+        <input class="button" type="submit" value="Submit">
+    </form>
+</div>
+
+
+{% endblock content %}
