@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -24,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'yf_*y(4onz4cp12cgg$93-bjrl^#u%t!1y7ce!znaiy@st30lx'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['todocodedjango.herokuapp.com', 'localhost', '127.0.0.1']
 
@@ -33,7 +32,6 @@ ALLOWED_HOSTS = ['todocodedjango.herokuapp.com', 'localhost', '127.0.0.1']
 
 INSTALLED_APPS = [
     'todo' ,
-    'crispy_forms' , 
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,6 +41,7 @@ INSTALLED_APPS = [
     'django_celery_results'
     
 ]
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -144,4 +143,4 @@ EMAIL_HOST_PASSWORD=''
 DEFAULT_FROM_EMAIL='celery <nabizabatool1@gmail.com>'
 
 #Acivate Django heroku
-django_heroku.settings(locals())
+#django_heroku.settings(locals())
