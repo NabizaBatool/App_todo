@@ -28,6 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['tododeploydjango.herokuapp.com', 'localhost', '127.0.0.1']
 
 
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -127,8 +128,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 #celery Settings
-#CELERY_BROKER_URL='redis://127.0.0.1:6379'
-CELERY_BROKER_URL=os.environ['REDIS_URL']
+CELERY_BROKER_URL='redis://127.0.0.1:6379'
+#CELERY_BROKER_URL=os.environ['REDIS_URL']
 CELERY_ACCEPT_CONTENT=['application/json']
 CELERY_TASK_SERILAIZER='json'
 CELERY_RESULT_SERILAIZER='json'
@@ -140,7 +141,7 @@ EMAIL_HOST='smtp.gmail.com'
 EMAIL_PORT=587
 EMAIL_USE_TLS=True
 EMAIL_HOST_USER='nabizabatool1@gmail.com'
-EMAIL_HOST_PASSWORD='vqbnvvrdztdojteu'
+EMAIL_HOST_PASSWORD=''
 DEFAULT_FROM_EMAIL='celery <nabizabatool1@gmail.com>'
 
 #Acivate Django heroku
