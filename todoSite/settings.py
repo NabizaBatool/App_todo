@@ -28,25 +28,24 @@ DEBUG = True
 ALLOWED_HOSTS = ['tododeploydjango.herokuapp.com', 'localhost', '127.0.0.1']
 
 
-
 # Application definition
 
 INSTALLED_APPS = [
-    'todo' ,
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_celery_results'
-    
+    'django_celery_results',
+    'todo'
+
 ]
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -127,22 +126,18 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
-#celery Settings
-CELERY_BROKER_URL='redis://127.0.0.1:6379'
-#CELERY_BROKER_URL=os.environ['REDIS_URL']
-CELERY_ACCEPT_CONTENT=['application/json']
-CELERY_TASK_SERILAIZER='json'
-CELERY_RESULT_SERILAIZER='json'
+# celery Settings
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERILAIZER = 'json'
+CELERY_RESULT_SERILAIZER = 'json'
 CELERY_RESULT_BACKEND = 'django-db'
 CELERY_TASK_SERIALIZER = 'json'
 
-EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST='smtp.gmail.com'
-EMAIL_PORT=587
-EMAIL_USE_TLS=True
-EMAIL_HOST_USER='nabizabatool1@gmail.com'
-EMAIL_HOST_PASSWORD=''
-DEFAULT_FROM_EMAIL='celery <nabizabatool1@gmail.com>'
-
-#Acivate Django heroku
-#django_heroku.settings(locals())
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = '587'
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'nabizabatool1@gmail.com'
+EMAIL_HOST_PASSWORD = ''
+DEFAULT_FROM_EMAIL = 'celery <nabizabatool1@gmail.com>'
