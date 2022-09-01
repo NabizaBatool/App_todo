@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import datetime
 
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -11,7 +11,6 @@ from .task import sendmail_func
 
 
 # Create your views here.
-#
 def registerPage(request):
     if request.user.is_authenticated:
         return redirect('index')
@@ -62,36 +61,18 @@ def remove(request, item_id):
 
 @login_required(login_url='/loginpage')
 def index(request):
-    list = Todo.objects.filter(user=request.user).order_by("-created")
-    count = list.count()-list.all().filter(complete=True).count()
-    completed = Todo.objects.filter(user=request.user, complete=True)
-   # print(completed)
-    # print(date.today())
-  #  print(list[0].created.date())
-    task = Todo.objects.filter(user=request.user, complete=False)
-    print(task)
-    overdue = []
-    for task in task:
-
-        if task.created.date() < date.today():
-            overdue.append(task)
-
-        else:
-            continue
-    print("overdue check")
-    print(overdue)
-
+    list_of_tasks = Todo.objects.filter(user=request.user).order_by("-created")
+    task = list_of_tasks.filter(complete=False)
+    count = task.count()
+    overdue_task = task.filter(created__lt=datetime.now())
     mail_subject = 'Overdue Task'
     to_email = request.user.email
     message = "These are overdue Task: "
-    for i in overdue:
+    for i in overdue_task:
         message += ' ' + i.title
-        print(message)
-
     sendmail_func.delay(mail_subject, message, to_email)
-
     page = {
-        "list": list,
+        "list": list_of_tasks,
         "count": count
     }
     return render(request, 'todo/index.html', page)
@@ -102,18 +83,14 @@ def createTask(request):
     if request.method == "POST":
         title = request.POST.get('title')
         desc = request.POST.get('description')
-        status = request.POST.get('complete')
-        if status == 'on':
-            status = True
-        else:
-            status = False
+        status = True if request.POST.get('complete') == 'on' else False
         date = request.POST.get('created')
         todo = Todo(user=request.user, title=title,
                     description=desc, complete=status, created=date)
         todo.save()
         messages.info(request, "Todo added")
         mail_subject = 'Create Task'
-        message = "Welcome to todo app , you have created a task"
+        message = "Welcome to todo app , you have created a task: " + ' ' + todo.title
         to_email = request.user.email
         sendmail_func.delay(mail_subject, message, to_email)
 
@@ -128,8 +105,7 @@ def update(request, item_id):
     if request.method == "POST":
         editTask.title = request.POST.get('title')
         editTask.description = request.POST.get('description')
-        editTask.complete = request.POST.get('complete')
-        if editTask.complete == 'on':
+        if  request.POST.get('complete') == 'on':
             editTask.complete = True
             mail_subject = 'Complete Task'
             message = "Wow you have completed a task"

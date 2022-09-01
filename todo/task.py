@@ -5,6 +5,7 @@ from todoSite import settings
 
 @shared_task(bind=True)
 def sendmail_func(self, mail_subject, message, to_email):
+    
     send_mail(
         subject=mail_subject,
         message=message,
