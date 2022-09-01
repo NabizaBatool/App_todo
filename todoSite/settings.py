@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'yf_*y(4onz4cp12cgg$93-bjrl^#u%t!1y7ce!znaiy@st30lx'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['todocodedjango.herokuapp.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['tododeploydjango.herokuapp.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -130,7 +130,6 @@ CELERY_BROKER_URL='redis://127.0.0.1:6379'
 CELERY_ACCEPT_CONTENT=['application/json']
 CELERY_TASK_SERILAIZER='json'
 CELERY_RESULT_SERILAIZER='json'
-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
 CELERY_RESULT_BACKEND = 'django-db'
 CELERY_TASK_SERIALIZER = 'json'
 
